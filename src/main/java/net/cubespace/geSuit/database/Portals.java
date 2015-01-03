@@ -39,7 +39,9 @@ public class Portals implements IRepository {
                 double zmin = res.getDouble("zmin");
 
                 Portal p = new Portal(name, server, fill, type, dest, new Location(server, world, xmax, ymax, zmax), new Location(server, world, xmin, ymin, zmin));
-                if (p.getServer() != null) {
+                if (p.getServer() == null) {
+                    res.deleteRow();
+                } else {
                     List<Portal> list = portalMap.get(p.getServer());
                     if (list == null) {
                         list = new ArrayList<>();
